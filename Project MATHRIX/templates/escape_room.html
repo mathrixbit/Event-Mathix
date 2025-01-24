@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Escape Room</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <style>
+      body {
+        border: 10px solid darkblue;
+        padding: 20px;
+        margin: 20px;
+      }
+      .door {
+        border: 3px solid black;
+        padding: 20px;
+        cursor: pointer;
+        margin: 10px;
+        text-align: center;
+      }
+      #riddleSection,
+      #keyHintSection,
+      #finalRiddleSection,
+      #completionTime {
+        display: none;
+      }
+      #timer {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 20px;
+        font-weight: bold;
+        background: lightgray;
+        padding: 5px 10px;
+        border-radius: 5px;
+      }
+    </style>
+  </head>
+  <body class="text-center bg-dark text-light">
+    <div id="timer">Time: 0s</div>
+    <div class="container mt-5">
+      <h1 class="mb-4">Escape Room</h1>
+      <p>Select a door to proceed.</p>
+
+      <div class="row">
+        <div class="col-md-6">
+          <div class="door" id="door1">Door 1</div>
+        </div>
+        <div class="col-md-6">
+          <div class="door" id="door2">Door 2</div>
+        </div>
+      </div>
+
+      <div id="riddleSection" class="mt-4 alert alert-warning">
+        <p>
+          <strong>Riddle:</strong> "Only A ∪ B - A can enter this room. Who can
+          proceed?"
+        </p>
+        <input
+          type="text"
+          id="answerInput"
+          class="form-control"
+          placeholder="Enter IDs (e.g., A2, A4)"
+        />
+        <button class="btn btn-success mt-2" onclick="checkAnswer()">
+          Submit
+        </button>
+      </div>
+
+      <div id="keyHintSection" class="mt-4 alert alert-info">
+        <p><strong>Key Found:</strong> "Kudos"</p>
+        <p><strong>Hint:</strong> "I hate even numbers." Use it wisely!</p>
+        <input
+          type="text"
+          id="keyInput"
+          class="form-control"
+          placeholder="Enter Key"
+        />
+        <button class="btn btn-primary mt-2" onclick="useKey()">Use Key</button>
+      </div>
+
+      <div id="finalRiddleSection" class="mt-4 alert alert-success">
+        <p><strong>Final Riddle:</strong> "What is 7 + 5?"</p>
+        <input
+          type="text"
+          id="finalAnswerInput"
+          class="form-control"
+          placeholder="Enter Answer"
+        />
+        <button class="btn btn-success mt-2" onclick="checkFinalAnswer()">
+          Submit
+        </button>
+      </div>
+
+      <div id="completionTime" class="mt-4 alert alert-success"></div>
+    </div>
+
+    <script>
+      let startTime = Date.now();
+      let timerElement = document.getElementById("timer");
+
+      function updateTimer() {
+        let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+        timerElement.innerText = "Time: " + elapsedTime + "s";
+      }
+      setInterval(updateTimer, 1000);
+
+      document.getElementById("door2").addEventListener("click", function () {
+        document.getElementById("riddleSection").style.display = "block";
+      });
+
+      function checkAnswer() {
+        let answer = document.getElementById("answerInput").value.trim();
+
+        // Split the input by commas and clean up the values
+        let userIDs = answer
+          .split(",")
+          .map((id) => id.trim())
+          .filter((id) => id.length > 0);
+
+        // Correct IDs for A ∪ B - A
+        let correctIDs = ["A2", "A4"];
+
+        // Compare the two arrays (unordered)
+        if (arraysEqual(userIDs, correctIDs)) {
+          document.getElementById("riddleSection").style.display = "none";
+          document.getElementById("keyHintSection").style.display = "block";
+        } else {
+          alert("Incorrect! Try again.");
+        }
+      }
+
+      function useKey() {
+        let key = document.getElementById("keyInput").value.trim();
+        if (key.toLowerCase() === "kudos") {
+          document.getElementById("keyHintSection").style.display = "none";
+          document.getElementById("finalRiddleSection").style.display = "block";
+        } else {
+          alert("Wrong key! Try again.");
+        }
+      }
+
+      function checkFinalAnswer() {
+        let finalAnswer = document
+          .getElementById("finalAnswerInput")
+          .value.trim();
+        if (finalAnswer === "12") {
+          // Correct answer for "What is 7 + 5?"
+          let elapsedTime = Math.floor((Date.now() - startTime) / 1000);
+          document.getElementById("finalRiddleSection").style.display = "none";
+          let completionMessage =
+            "Congratulations! You completed this in " +
+            elapsedTime +
+            " seconds!";
+          document.getElementById("completionTime").innerText =
+            completionMessage;
+          document.getElementById("completionTime").style.display = "block";
+        } else {
+          alert("Incorrect! Try again.");
+        }
+      }
+
+      function arraysEqual(arr1, arr2) {
+        if (arr1.length !== arr2.length) return false;
+        return (
+          arr1.every((val) => arr2.includes(val)) &&
+          arr2.every((val) => arr1.includes(val))
+        );
+      }
+    </script>
+  </body>
+</html>
