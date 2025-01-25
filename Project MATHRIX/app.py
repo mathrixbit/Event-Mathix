@@ -104,9 +104,9 @@ def check_answer():
     user_answer = data.get("answer", "").replace(" ", "").lower()
 
     if user_answer in [ans.replace(" ", "").lower() for ans in correct_answers]:
-        Mathrix_send_image("/Project MATHRIX/static/images/IMG20250111145756.jpg",caption=" ")
-        Mathrix_send_image("/Project MATHRIX/static/images/IMG20250111151051.jpg",caption=" ")
-        Mathrix_send_image("/Project MATHRIX/static/images/IMG20250111151545.jpg",caption=" ")
+        Mathrix_send_image("Project MATHRIX/static/images/IMG20250111145756.jpg",caption=" ")
+        Mathrix_send_image("Project MATHRIX/static/images/IMG20250111151051.jpg",caption=" ")
+        Mathrix_send_image("Project MATHRIX/static/images/IMG20250111151545.jpg",caption=" ")
         return jsonify({"correct": True})
 
     else:
