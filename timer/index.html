@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip Timer</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row justify-content-center mt-5">
+            <div class="col-md-8">
+                <div class="flip-timer">
+                    <div class="timer-section">
+                        <div class="flip-card hours">
+                            <div class="top">00</div>
+                            <div class="bottom">00</div>
+                        </div>
+                        <div class="label">Hours</div>
+                    </div>
+                    <div class="timer-section">
+                        <div class="flip-card minutes">
+                            <div class="top">00</div>
+                            <div class="bottom">00</div>
+                        </div>
+                        <div class="label">Minutes</div>
+                    </div>
+                    <div class="timer-section">
+                        <div class="flip-card seconds">
+                            <div class="top">00</div>
+                            <div class="bottom">00</div>
+                        </div>
+                        <div class="label">Seconds</div>
+                    </div>
+                </div>
+                <div class="controls mt-4 text-center">
+                    <button class="btn btn-primary start-btn">Start</button>
+                    <button class="btn btn-danger stop-btn">Stop</button>
+                    <button class="btn btn-secondary reset-btn">Reset</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
