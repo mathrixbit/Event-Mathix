@@ -1,0 +1,79 @@
+.flip-timer {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    font-size: 60px;
+    font-family: 'Arial', sans-serif;
+}
+
+.timer-section {
+    text-align: center;
+}
+
+.flip-card {
+    position: relative;
+    width: 100px;
+    height: 100px;
+    background-color: #333;
+    border-radius: 10px;
+    perspective: 400px;
+}
+
+.top, .bottom {
+    position: absolute;
+    width: 100%;
+    height: 50%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
+
+.top {
+    background-color: #444;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom: 1px solid #000;
+}
+
+.bottom {
+    bottom: 0;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.flip-card.flip .top {
+    animation: flip-top 0.6s;
+    transform-origin: bottom;
+}
+
+.flip-card.flip .bottom {
+    animation: flip-bottom 0.6s;
+    transform-origin: top;
+}
+
+@keyframes flip-top {
+    0% { transform: rotateX(0deg); }
+    100% { transform: rotateX(-90deg); }
+}
+
+@keyframes flip-bottom {
+    0% { transform: rotateX(90deg); }
+    100% { transform: rotateX(0deg); }
+}
+
+.label {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.controls {
+    margin-top: 20px;
+}
+
+.btn {
+    margin: 0 5px;
+}
